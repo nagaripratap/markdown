@@ -55,7 +55,7 @@ Create Visualization: Go to Visualize Library > Create Visualization > Lens.
 
 **Recommended Dashboard Graphs**
 | Graph Type| X-Axis | Y-Axis | Purpose |
-| :---     | :---:  | ---:  | ---: |
+| :---: | :---:  | :---:  | :---: |
 | Area Chart    | @timestamp   |heap_before & heap_after   |Tracks the "sawtooth" pattern and memory leaks  |
 |Bar Chart|	@timestamp	|duration (Max/Avg)|	Identifies "Stop the World" pauses causing latency.|
 |Metric Card|	N/A|	Count of GC types|	Monitors the frequency of dangerous Full GC events.|
