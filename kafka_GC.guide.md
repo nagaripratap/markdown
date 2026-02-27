@@ -29,12 +29,14 @@ filebeat.modules:
     gc:
       enabled: true
       var.paths: ["/var/log/confluent/gc.log*"]
+
 Use code with caution.
+```
 
 Deploy Filebeat as a DaemonSet. It will automatically parse and ship the data.
 Option B: Logstash Pipeline (Most Flexible)
 Use this if you have a custom log format or require advanced filtering.
-ruby
+```ruby
 filter {
   if [log][file][path] =~ "gc.log" {
     grok {
@@ -43,24 +45,29 @@ filter {
   }
 }
 Use code with caution.
-
+```
 Phase 3: Kibana Visualization
 Once the data is indexed, follow these steps:
 Create Index Pattern: Navigate to Stack Management > Index Patterns and add filebeat-* or logstash-*.
 Create Visualization: Go to Visualize Library > Create Visualization > Lens.
 Recommended Dashboard Graphs
-Graph Type	X-Axis	Y-Axis	Purpose
-Area Chart	@timestamp	heap_before & heap_after	Tracks the "sawtooth" pattern and memory leaks.
-Bar Chart	@timestamp	duration (Max/Avg)	Identifies "Stop the World" pauses causing latency.
-Metric Card	N/A	Count of GC types	Monitors the frequency of dangerous Full GC events.
-Alternative: The "GCViewer" Shortcut
+| Graph Type| X-Axis | Y-Axis | Purpose |
+| :---     | :---:  | ---:  | ---: |
+| Area Chart    | @timestamp   |heap_before & heap_after   |Tracks the "sawtooth" pattern and memory leaks  |
+|Bar Chart|	@timestamp	|duration (Max/Avg)|	Identifies "Stop the World" pauses causing latency.|
+|Metric Card|	N/A|	Count of GC types|	Monitors the frequency of dangerous Full GC events.|
+
+
+
+### Alternative: The "GCViewer" Shortcut
 If you need immediate results without setting up the Elastic Stack:
 Extract the log to Windows:
-powershell
+```powershell
 kubectl cp -n confluent kafka-0:/path/to/gc.log ./gc.log -c kafka
 Use code with caution.
+```
 
-Use GCViewer:
+### Use GCViewer:
 Download the JAR file.
 Open your gc.log.
 
