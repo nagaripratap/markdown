@@ -32,7 +32,6 @@ filebeat.modules:
 
 Use code with caution.
 ```
-
 Deploy Filebeat as a DaemonSet. It will automatically parse and ship the data.
 Option B: Logstash Pipeline (Most Flexible)
 Use this if you have a custom log format or require advanced filtering.
@@ -46,11 +45,15 @@ filter {
 }
 Use code with caution.
 ```
-Phase 3: Kibana Visualization
+## Phase 3: Kibana Visualization
+
 Once the data is indexed, follow these steps:
+
 Create Index Pattern: Navigate to Stack Management > Index Patterns and add filebeat-* or logstash-*.
+
 Create Visualization: Go to Visualize Library > Create Visualization > Lens.
-Recommended Dashboard Graphs
+
+**Recommended Dashboard Graphs**
 | Graph Type| X-Axis | Y-Axis | Purpose |
 | :---     | :---:  | ---:  | ---: |
 | Area Chart    | @timestamp   |heap_before & heap_after   |Tracks the "sawtooth" pattern and memory leaks  |
